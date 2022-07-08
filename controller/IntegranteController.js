@@ -5,7 +5,7 @@ import { queries } from "../scripts/queries";
 export const getIntegrantes = async (req, res) => {
   const pool = await connect();
   const results = await pool.request().query(queries.SelectPersonas);
-  console.log(results.recordset)
+  console.log(results.recordset);
   res.send(results.recordset);
 };
 export const getIntegrante = async (req, res) => {
@@ -17,7 +17,7 @@ export const getIntegrante = async (req, res) => {
   const results = await pool
     .request()
     .input("id", id)
-    .query(queries.SelectIntegrantesById);
+    .query(queries.SelectPersonasById);
 
   res.json(results.recordset[0]);
 };
@@ -28,27 +28,58 @@ export const getIntegrantesCount = async (req, res) => {
 };
 
 export const saveIntegrantes = async (req, res) => {
-  const { title, description } = req.body;
+  const {
+    Nombre,
+    Apellido,
+    Apodo,
+    Cedula,
+    IdRangoEdad,
+    Telefono,
+    Email,
+    IdDirigente,
+    IdPartido,
+    IdRol,
+    IdComite,
+    IdMunicipio,
+    IdSector,
+    Colegio,
+    IdUsuario,
+  } = req.body;
 
+  console.log(req.body);
+  return;
   const pool = await connect();
   const results = await pool
     .request()
-    .input("title", title)
-    .input("description", description)
-    .query(queries.InsertIntegrantes);
+    .input("Nombre", Nombre)
+    .input("Apellido", Apellido)
+    .input("Apodo", Apodo)
+    .input("Cedula", Cedula)
+    .input("IdRangoEdad", IdRangoEdad)
+    .input("Telefono", Telefono)
+    .input("Email", Email)
+    .input("IdDirigente", IdDirigente)
+    .input("IdPartido", IdPartido)
+    .input("IdRol", IdRol)
+    .input("IdComite", IdComite)
+    .input("IdMunicipio", IdMunicipio)
+    .input("IdSector", IdSector)
+    .input("Colegio", Colegio)
+    .input("IdUsuario", IdUsuario)
+    .query(queries.InsertUsuarios);
 
   console.log(results);
   console.log(req.body);
 };
 
 export const deleteIntegrantes = async (req, res) => {
-  const { id } = req.params;
+  const { Id } = req.params;
   const pool = await connect();
 
   const results = await pool
     .request()
-    .input("id", id)
-    .query(queries.DeleteIntegrantes);
+    .input("Id", Id)
+    .query(queries.DeletePersonas);
 
   res.sendStatus(204);
   console.log(req.params);
@@ -56,15 +87,44 @@ export const deleteIntegrantes = async (req, res) => {
 
 export const updateIntegrantes = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { title, description } = req.body;
+    const { Id } = req.params;
+    const {
+      Nombre,
+      Apellido,
+      Apodo,
+      Cedula,
+      IdRangoEdad,
+      Telefono,
+      Email,
+      IdDirigente,
+      IdPartido,
+      IdRol,
+      IdComite,
+      IdMunicipio,
+      IdSector,
+      Colegio,
+      IdUsuario,
+    } = req.body;
     const pool = await connect();
 
     const results = await pool
       .request()
-      .input("id", id)
-      .input("title", title)
-      .input("description", description)
+      .input("id", Id)
+      .input("Nombre", Nombre)
+      .input("Apellido", Apellido)
+      .input("Apodo", Apodo)
+      .input("Cedula", Cedula)
+      .input("IdRangoEdad", IdRangoEdad)
+      .input("Telefono", Telefono)
+      .input("Email", Email)
+      .input("IdDirigente", IdDirigente)
+      .input("IdPartido", IdPartido)
+      .input("IdRol", IdRol)
+      .input("IdComite", IdComite)
+      .input("IdMunicipio", IdMunicipio)
+      .input("IdSector", IdSector)
+      .input("Colegio", Colegio)
+      .input("IdUsuario", IdUsuario)
       .query(queries.UpdateIntegrantes);
 
     res.send(results.rowsAffected[0]);
