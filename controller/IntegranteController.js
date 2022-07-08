@@ -46,8 +46,6 @@ export const saveIntegrantes = async (req, res) => {
     IdUsuario,
   } = req.body;
 
-  console.log(req.body);
-  return;
   const pool = await connect();
   const results = await pool
     .request()
