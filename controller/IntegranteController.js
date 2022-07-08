@@ -69,7 +69,7 @@ export const saveIntegrantes = async (req, res) => {
   console.log(results);
   console.log(req.body);
 };
-
+ 
 export const deleteIntegrantes = async (req, res) => {
   const { Id } = req.params;
   const pool = await connect();
