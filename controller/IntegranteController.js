@@ -46,8 +46,6 @@ export const saveIntegrantes = async (req, res) => {
     IdUsuario,
   } = req.body;
 
-  console.log(req.body);
-  return;
   const pool = await connect();
   const results = await pool
     .request()
@@ -66,10 +64,9 @@ export const saveIntegrantes = async (req, res) => {
     .input("IdSector", IdSector)
     .input("Colegio", Colegio)
     .input("IdUsuario", IdUsuario)
-    .query(queries.InsertUsuarios);
+    .query(queries.InsertPersonas);
 
-  console.log(results);
-  console.log(req.body);
+  res.json(results.rowsAffected[0]);
 };
 
 export const deleteIntegrantes = async (req, res) => {
