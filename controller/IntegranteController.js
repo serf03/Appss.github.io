@@ -68,7 +68,7 @@ export const saveIntegrantes = async (req, res) => {
 
   res.json(results.rowsAffected[0]);
 };
-
+ 
 export const deleteIntegrantes = async (req, res) => {
   const { Id } = req.params;
   const pool = await connect();
