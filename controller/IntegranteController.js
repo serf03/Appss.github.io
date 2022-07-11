@@ -28,6 +28,7 @@ export const getIntegrantesCount = async (req, res) => {
 };
 
 export const saveIntegrantes = async (req, res) => {
+  const pool = await connect();
   const {
     Nombre,
     Apellido,
@@ -46,7 +47,17 @@ export const saveIntegrantes = async (req, res) => {
     IdUsuario,
   } = req.body;
 
-  const pool = await connect();
+  //validar si existe el integrante
+  const result = await pool
+    .request()
+    .input("Cedula", Cedula)
+    .query("SELECT * FROM Persona WHERE Cedula = @Cedula");
+
+  if (result.recordset.length > 0) {
+    res.json(404);
+    return;
+  }
+
   const results = await pool
     .request()
     .input("Nombre", Nombre)
@@ -68,7 +79,7 @@ export const saveIntegrantes = async (req, res) => {
 
   res.json(results.rowsAffected[0]);
 };
- 
+
 export const deleteIntegrantes = async (req, res) => {
   const { Id } = req.params;
   const pool = await connect();
