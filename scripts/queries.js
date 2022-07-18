@@ -10,10 +10,11 @@ export const queries = {
   InsertPersonas: `INSERT INTO [PartiCenter].[dbo].[Persona] 
              (Nombre, Apellido, Apodo, Cedula, IdRangoEdad, Telefono, Email, IdDirigente, IdPartido, IdRol, IdComite, IdMunicipio, IdSector, Colegio, IdUsuario)
 VALUES (@Nombre, @Apellido, @Apodo, @Cedula, @IdRangoEdad, @Telefono, @Email, @IdDirigente, @IdPartido, @IdRol, @IdComite, @IdMunicipio, @IdSector, @Colegio, @IdUsuario)`,
-  DeletePersonas: `DELETE FROM [PartiCenter].[dbo].[Persona] WHERE Id = @id`,
+
+  DeletePersonas: `UPDATE [PartiCenter].[dbo].[Persona] SET Estatus = 1 WHERE Id = @id`,
   UpdatePersonas: `UPDATE [PartiCenter].[dbo].[Persona] SET Nombre = @Nombre, Apellido = @Apellido, Apodo = @Apodo, Cedula = @Cedula, IdRangoEdad = @IdRangoEdad, Telefono = @Telefono, Email = @Email, IdDirigente = @IdDirigente, IdPartido = @IdPartido, IdRol = @IdRol, IdComite = @IdComite, IdMunicipio = @IdMunicipio, IdSector = @IdSector, Colegio = @Colegio, IdUsuario = @IdUsuario WHERE Id = @id`,
-  SelectPersonasById: `SELECT * FROM [PartiCenter].[dbo].[Persona] WHERE Id = @id  ORDER BY Id DESC`,
-  SelectPersonas: `SELECT * FROM [PartiCenter].[dbo].[Persona]  ORDER BY Id DESC`,
+  SelectPersonasById: `SELECT * FROM [PartiCenter].[dbo].[Persona] WHERE IdDirigente = @IdDirigente AND Estatus = 0 ORDER BY Id DESC`,
+  SelectPersonas: `SELECT * FROM [PartiCenter].[dbo].[Persona] WHERE IdDirigente = @IdDirigente AND Estatus = 0 ORDER BY Id DESC`,
   //Usuario//
   SelectUsuarios: `SELECT * FROM [PartiCenter].[dbo].[Usuarios]  ORDER BY Id DESC`,
   SelectUsuariosById: `SELECT * FROM [PartiCenter].[dbo].[Usuarios] WHERE Id = @id  ORDER BY Id DESC`,

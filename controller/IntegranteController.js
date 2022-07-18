@@ -3,23 +3,24 @@ import { connect } from "../database/db.js";
 import { queries } from "../scripts/queries";
 
 export const getIntegrantes = async (req, res) => {
+  const { idDirigente } = req.params;
+
   const pool = await connect();
-  const results = await pool.request().query(queries.SelectPersonas);
-  console.log(results.recordset);
+  const results = await pool
+    .request()
+    .input("IdDirigente", idDirigente)
+    .query(queries.SelectPersonas);
   res.send(results.recordset);
 };
 export const getIntegrante = async (req, res) => {
   const { id } = req.params;
 
-  console.log(req.params);
-
   const pool = await connect();
   const results = await pool
     .request()
-    .input("id", id)
+    .input("IdDirigente", id)
     .query(queries.SelectPersonasById);
-
-  res.json(results.recordset[0]);
+  res.json(results.recordset);
 };
 
 export const getIntegrantesCount = async (req, res) => {
@@ -81,16 +82,16 @@ export const saveIntegrantes = async (req, res) => {
 };
 
 export const deleteIntegrantes = async (req, res) => {
-  const { Id } = req.params;
+  const { id } = req.params;
   const pool = await connect();
 
   const results = await pool
     .request()
-    .input("Id", Id)
+    .input("Id", id)
     .query(queries.DeletePersonas);
 
-  res.sendStatus(204);
-  console.log(req.params);
+  console.log(id);
+  res.json(results.rowsAffected[0]);
 };
 
 export const updateIntegrantes = async (req, res) => {
