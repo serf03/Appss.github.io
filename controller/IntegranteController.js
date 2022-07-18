@@ -52,7 +52,7 @@ export const saveIntegrantes = async (req, res) => {
   const result = await pool
     .request()
     .input("Cedula", Cedula)
-    .query("SELECT * FROM Persona WHERE Cedula = @Cedula");
+    .query("SELECT * FROM Persona WHERE Cedula = @Cedula AND Estatus = 0");
 
   if (result.recordset.length > 0) {
     res.json(404);
