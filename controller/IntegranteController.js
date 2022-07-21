@@ -2,14 +2,26 @@ import { GetJson, PostJson } from "../librer";
 import { connect } from "../database/db.js";
 import { queries } from "../scripts/queries";
 
+//Buscar Cedula
+export async function SearchIntegrante(req, res) {
+  const { id } = req.params;
+  const pool = await connect();
+  const results = await pool
+    .request()
+    .input("Cedula", id)
+    .query(queries.SelectPersonasCedula);
+  res.send(results.recordset[0]);
+}
+
 export const getIntegrantes = async (req, res) => {
   const { idDirigente } = req.params;
-
+  console.log(idDirigente);
   const pool = await connect();
   const results = await pool
     .request()
     .input("IdDirigente", idDirigente)
     .query(queries.SelectPersonas);
+  console.log(results);
   res.send(results.recordset);
 };
 export const getIntegrante = async (req, res) => {

@@ -12,11 +12,26 @@ POST {{api}}
 Content-Type: application/json
 
 {
-    "title": "Count",
-    "description": "Count the 5"
+    "Id": "1",
+    "Nombre": "Marcos",
+    "Apellido": "Mateo",
+    "Apodo": "Mato",
+    "Cedula": "000-0000000-0",
+    "IdRangoEdad": 25,
+    "Telefono": "8090000000",
+    "Email": "m@gmail.com",
+    "IdDirigente": 1,
+    "IdPartido": 1,
+    "IdRol": 1,
+    "IdComite": 1,
+    "IdMunicipio": 1,
+    "IdSector": 1,
+    "Colegio": '2020',
+    "IdUsuario": 1,
+    "Fecha": 2022-07-08T11:08:46.160Z
 }
 ###
-DELETE  {{api}}/10
+DELETE  {{api}}/5
 ###
 PUT  {{api}}/10
 Content-Type: application/json

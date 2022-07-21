@@ -11,6 +11,8 @@ export const queries = {
              (Nombre, Apellido, Apodo, Cedula, IdRangoEdad, Telefono, Email, IdDirigente, IdPartido, IdRol, IdComite, IdMunicipio, IdSector, Colegio, IdUsuario)
 VALUES (@Nombre, @Apellido, @Apodo, @Cedula, @IdRangoEdad, @Telefono, @Email, @IdDirigente, @IdPartido, @IdRol, @IdComite, @IdMunicipio, @IdSector, @Colegio, @IdUsuario)`,
 
+  //Consultar Cedula
+  SelectPersonasCedula: `EXEC [padron].[dbo].[ProcCedulados] @Cedula`,
   DeletePersonas: `UPDATE [PartiCenter].[dbo].[Persona] SET Estatus = 1 WHERE Id = @id`,
   UpdatePersonas: `UPDATE [PartiCenter].[dbo].[Persona] SET Nombre = @Nombre, Apellido = @Apellido, Apodo = @Apodo, Cedula = @Cedula, IdRangoEdad = @IdRangoEdad, Telefono = @Telefono, Email = @Email, IdDirigente = @IdDirigente, IdPartido = @IdPartido, IdRol = @IdRol, IdComite = @IdComite, IdMunicipio = @IdMunicipio, IdSector = @IdSector, Colegio = @Colegio, IdUsuario = @IdUsuario WHERE Id = @id`,
   SelectPersonasById: `SELECT * FROM [PartiCenter].[dbo].[Persona] WHERE IdDirigente = @IdDirigente AND Estatus = 0 ORDER BY Id DESC`,
